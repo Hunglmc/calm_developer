@@ -47,12 +47,16 @@ export default function userController(
   };
 
   const addNewUser = (req, res, next) => {
-    const { username, password, email, role, createdAt } = req.body;
+    const { username, password, email, role, createdAt , fullName,phoneNumber,address,dateOfBirth} = req.body;
     addUser(
       username,
       password,
       email,
       role,
+      fullName,
+      phoneNumber,
+      address,
+      dateOfBirth,
       createdAt,
       dbRepository,
       authService
