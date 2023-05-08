@@ -1,4 +1,4 @@
-export default function postRepository(repository) {
+export default function categoryDbRepository(repository) {
     const findAll = (params) => repository.findAll(params);
     const countAll = (params) => repository.countAll(params);
     const findById = (id) => repository.findById(id);

@@ -4,25 +4,26 @@ import bcrypt from 'bcryptjs';
 import config from '../../config/config';
 
 export default function authService() {
-  const encryptPassword = (password) => {
-    const salt = bcrypt.genSaltSync(10);
-    return bcrypt.hashSync(password, salt);
-  };
+    const encryptPassword = (password) => {
+        const salt = bcrypt.genSaltSync(10);
+        return bcrypt.hashSync(password, salt);
+    };
 
-  const compare = (password, hashedPassword) =>
-    bcrypt.compareSync(password, hashedPassword);
+    const compare = (password, hashedPassword) => bcrypt.compareSync(password, hashedPassword);
 
-  const verify = (token) => jwt.verify(token, config.jwtSecret);
+    const verify = (token) => jwt.verify(token, config.jwtSecret.secret);
 
-  const generateToken = (payload) =>
-    jwt.sign(payload, config.jwtSecret, {
-      expiresIn: 360000
-    });
+    const generateToken = (payload) =>
+        jwt.sign(payload, config.jwtSecret.secret, {
+            expiresIn: 360000,
+        });
 
-  return {
-    encryptPassword,
-    compare,
-    verify,
-    generateToken
-  };
+    // const refreshToken = (payload) => jwt.sign(payload, config.jwtSecret.secret);
+
+    return {
+        encryptPassword,
+        compare,
+        verify,
+        generateToken,
+    };
 }

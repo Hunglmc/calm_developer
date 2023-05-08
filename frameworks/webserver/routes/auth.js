@@ -5,18 +5,13 @@ import authServiceInterface from '../../../application/services/authService';
 import authServiceImpl from '../../services/authService';
 
 export default function authRouter(express) {
-  const router = express.Router();
+    const router = express.Router();
 
-  // load controller with dependencies
-  const controller = authController(
-    userDbRepository,
-    userDbRepositoryMongoDB,
-    authServiceInterface,
-    authServiceImpl
-  );
-
-  // POST enpdpoints
-  router.route('/').post(controller.loginUser);
-
-  return router;
+    // load controller with dependencies
+    const controller = authController(userDbRepository, userDbRepositoryMongoDB, authServiceInterface, authServiceImpl);
+    // POST enpdpoints
+    router.route('/login').post(controller.loginUser);
+    router.route('/forgot-password').post(controller.forgotPasswordUser);
+    router.route('/logout').post(controller.logoutUser);
+    return router;
 }

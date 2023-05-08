@@ -18,7 +18,8 @@ const UserSchema = new Schema({
     },
     role: {
         type: String,
-        default: 'test_user',
+        enum: ['user', 'admin', 'seller'],
+        default: 'user',
     },
     fullName: {
         type: String,
@@ -53,6 +54,18 @@ const UserSchema = new Schema({
     isDelete: {
         type: Boolean,
         default: false,
+    },
+    isEmailVerified: {
+        type: Boolean,
+        default: false,
+    },
+    profileImage: {
+        type: String,
+        required: false,
+    },
+    profileImageId: {
+        type: String,
+        required: false,
     },
     createdAt: Date,
     updateAt: Date,

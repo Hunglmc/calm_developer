@@ -1,17 +1,16 @@
 export default function authService(service) {
-  const encryptPassword = (password) => service.encryptPassword(password);
+    const encryptPassword = (password) => service.encryptPassword(password);
 
-  const compare = (password, hashedPassword) =>
-    service.compare(password, hashedPassword);
+    const compare = (password, hashedPassword) => service.compare(password, hashedPassword);
 
-  const verify = (token) => service.verify(token);
+    const verify = (token) => service.verify(token);
 
-  const generateToken = (payload) => service.generateToken(payload);
+    const generateToken = (payload) => service.generateToken(payload);
 
-  return {
-    encryptPassword,
-    compare,
-    verify,
-    generateToken
-  };
+    return {
+        encryptPassword,
+        compare,
+        verify,
+        generateToken,
+    };
 }
