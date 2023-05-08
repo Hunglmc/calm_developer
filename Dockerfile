@@ -18,7 +18,7 @@ COPY        tests /srv/calm_software/untils/
 
 RUN         yarn run build
 
-FROM        node:12.22.11-alpine
+FROM        node:14.20.1-alpine
 
 
 ENV         HTTP_MODE http
