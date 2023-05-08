@@ -14,6 +14,7 @@ COPY        config /srv/node-clean-architecture/config/
 COPY        frameworks /srv/node-clean-architecture/frameworks/
 COPY        src /srv/node-clean-architecture/src/
 COPY        tests /srv/node-clean-architecture/tests/
+COPY        tests /srv/node-clean-architecture/untils/
 
 RUN         yarn run build
 
