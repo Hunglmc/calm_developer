@@ -12,13 +12,25 @@ const categorySchema = new Schema(
             type: String,
             required: true,
         },
+        userId: {
+            type: Schema.Types.ObjectId,
+            ref: 'User'
+        },
+        isActive:{
+          type:Boolean,
+          default: true,
+        },
+        isDelete:{
+            type:Boolean,
+            default: false,
+        },
+        updateAt: Date,
+        updateAt: Date,
     },
-    {
-        timestamps: true,
-    },
+   
 );
 
-categorySchema.index({ name: 1 }, { unique: true });
+categorySchema.index({ name: 1, userId:1 }, { unique: true });
 
 const CategoryModel = mongoose.model('Category', categorySchema);
 

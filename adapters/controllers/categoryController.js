@@ -1,4 +1,11 @@
-export default function postController(
+import findAll from '../../application/use_cases/category/findAll';
+import countAll from '../../application/use_cases/category/countAll';
+import addNewCategory from '../../application/use_cases/category/add';
+import findById from '../../application/use_cases/category/findById';
+import updateById from '../../application/use_cases/category/updateById';
+import deleteCategoryById from '../../application/use_cases/category/deleteById';
+
+export default function categoryController(
     categoryDbRepository,
     categoryDbRepositoryImpl,
     cachingClient,
@@ -25,12 +32,12 @@ export default function postController(
         params.userId = req.user.id;
 
         findAll(params, dbRepository)
-            .then((posts) => {
-                response.posts = posts;
+            .then((categorys) => {
+                response.categorys = categorys;
                 const cachingOptions = {
-                    key: 'posts_',
+                    key: 'category_',
                     expireTimeSec: 30,
-                    data: JSON.stringify(posts),
+                    data: JSON.stringify(categorys),
                 };
                 // cache the result to redis
                 cachingRepository.setCache(cachingOptions);
@@ -47,39 +54,60 @@ export default function postController(
 
     const fetchCategoryById = (req, res, next) => {
         findById(req.params.id, dbRepository)
-            .then((post) => {
-                if (!post) {
-                    throw new Error(`No post found with id: ${req.params.id}`);
+            .then((category) => {
+                if (!category) {
+                    throw new Error(`No category found with id: ${req.params.id}`);
                 }
-                res.json(post);
+                res.json(category);
             })
             .catch((error) => next(error));
     };
 
-    const addNewCategory = (req, res, next) => {
-        const { title, description } = req.body;
-
-        // addPost({
-        //     title,
-        //     description,
-        //     userId: req.user.id,
-        //     postRepository: dbRepository,
-        // })
-        //     .then((post) => {
-        //         const cachingOptions = {
-        //             key: 'posts_',
-        //             expireTimeSec: 30,
-        //             data: JSON.stringify(post),
-        //         };
-        //         // cache the result to redis
-        //         cachingRepository.setCache(cachingOptions);
-        //         return res.json('post added');
-        //     })
-        //     .catch((error) => next(error));
+    const addNewCategorys = (req, res, next) => {
+        const { name, description } = req.body;
+        addNewCategory({
+            name,
+            description,
+            userId: req.user.id,
+            categoryRepository: dbRepository
+        }).then((category) => {
+                const cachingOptions = {
+                    key: 'category_',
+                    expireTimeSec: 30,
+                    data: JSON.stringify(category),
+                };
+                // cache the result to redis
+                cachingRepository.setCache(cachingOptions);
+                return res.json('post added');
+            })
+            .catch((error) => next(error));
     };
+
+    const deleteCategorysById = (req, res, next) => {
+        deleteCategoryById(req.params.id, dbRepository)
+          .then(() => res.json('Category sucessfully deleted!'))
+          .catch((error) => next(error));
+        };
+    
+      const updateCategoryById = (req, res, next) => {
+        const { name, description } = req.body;
+    
+        updateById({
+          id: req.params.id,
+          name,
+          description,
+          userId: req.user.id,
+          categoryRepository: dbRepository
+        })
+          .then((message) => res.json(message))
+          .catch((error) => next(error));
+      };
 
     return {
         fetchAllCategory,
         fetchCategoryById,
+        addNewCategorys,
+        updateCategoryById,
+        deleteCategorysById
     };
 }

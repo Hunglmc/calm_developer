@@ -1,12 +1,12 @@
-import post from '../../../src/entities/post';
+import category from '../../../src/entities/category';
 
-export default function addCategory({ title, description, createdAt, isPublished, userId, postRepository }) {
+export default function addCategory({ name, description, createdAt, userId, categoryRepository }) {
     // TODO: add a proper validation (consider using @hapi/joi)
     if (!title || !description) {
-        throw new Error('title and description fields cannot be empty');
+        throw new Error('name and description fields cannot be empty');
     }
 
-    const newCategory = post({ title, description, createdAt, isPublished, userId });
+    const newCategory = category({ name, description, createdAt, userId });
 
-    return postRepository.add(newCategory);
+    return categoryRepository.add(newCategory);
 }
