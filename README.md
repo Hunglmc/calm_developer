@@ -44,9 +44,6 @@ https://documenter.getpostman.com/view/1551953/TzCJgpnb
 
 
 ### Further reading
-- https://roystack.home.blog/2019/10/22/node-clean-architecture-deep-dive/
-- https://mannhowie.com/clean-architecture-node
-
 [Robert C. Martin]: <https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html>
 [docker]: <https://www.docker.com/>  
 [mongoDB]: <https://www.mongodb.com/try/download/community>
