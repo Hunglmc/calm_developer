@@ -18,6 +18,7 @@ COPY        tests /srv/calm_software/untils/
 
 RUN         yarn run build
 
+
 FROM        node:14.20.1-alpine
 
 
@@ -34,8 +35,8 @@ COPY        --from=builder /srv/calm_software/build /srv/api/build
 COPY        --from=builder /srv/calm_software/package.json /srv/api/package.json
 
 RUN         deluser --remove-home node \
-            && addgroup -S node -g 9999 \
-            && adduser -S -G node -u 9999 node
+    && addgroup -S node -g 9999 \
+    && adduser -S -G node -u 9999 node
 
 CMD         ["npm", "start"]
 

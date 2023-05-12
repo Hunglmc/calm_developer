@@ -1,9 +1,9 @@
-export default function category({ title, description, createdAt, isPublished = false, userId }) {
+export default function category({ name, description, createdAt, userId,updatedAt }) {
     return {
-        getTitle: () => title,
+        getName: () => name,
         getDescription: () => description,
         getCreatedAt: () => createdAt,
-        isPublished: () => isPublished,
         getUserId: () => userId,
+        getUpdatedAt: () => updatedAt,
     };
 }
