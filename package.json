@@ -42,7 +42,8 @@
         "multer": "^1.4.5-lts.1",
         "nodemailer": "^6.9.1",
         "pm2": "^5.1.2",
-        "redis": "^3.0.2"
+        "redis": "^3.0.2",
+        "@babel/plugin-transform-runtime": "^7.12.17"
     },
     "devDependencies": {
         "@babel/plugin-transform-runtime": "^7.12.17",

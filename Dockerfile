@@ -1,4 +1,4 @@
-FROM        node:14.20.1-alpine as builder
+FROM node:18-alpine as builder
 
 COPY        package.json /srv/calm_software/
 WORKDIR     /srv/calm_software/
@@ -16,10 +16,10 @@ COPY        src /srv/calm_software/src/
 COPY        tests /srv/calm_software/tests/
 COPY        tests /srv/calm_software/untils/
 
-RUN         yarn run build
+RUN         npm run build
 
 
-FROM        node:14.20.1-alpine
+FROM        node:18-alpine
 
 
 ENV         HTTP_MODE http
