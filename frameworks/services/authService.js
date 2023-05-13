@@ -17,9 +17,6 @@ export default function authService() {
         jwt.sign(payload, config.jwtSecret.secret, {
             expiresIn: 360000,
         });
-
-    // const refreshToken = (payload) => jwt.sign(payload, config.jwtSecret.secret);
-
     return {
         encryptPassword,
         compare,

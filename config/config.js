@@ -2,7 +2,9 @@ export default {
     port: process.env.PORT || 1234,
     ip: process.env.HOST || '0.0.0.0',
     mongo: {
-        uri: process.env.MONGO_URL || 'mongodb://127.0.0.1:27017/calm_dev',
+        uri:
+            process.env.MONGO_URL ||
+            'mongodb+srv://tinhoc112bkav:<fuUn9xHSusassHeg>@cluster0.tyohwjy.mongodb.net/?retryWrites=true&w=majority',
     },
     redis: {
         uri: process.env.REDIS_URL || 'redis://localhost:6379',
